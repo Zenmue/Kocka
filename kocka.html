@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Kocka forgatása</title>
+    <style>
+      #container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        perspective: 1000px;
+      }
+
+      .cube {
+        position: relative;
+        margin: 0 auto;
+        width: 200px;
+        height: 200px;
+        transform-style: preserve-3d;
+        transition: transform 0.5s;
+      }
+
+      .face {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        backface-visibility: hidden;
+      }
+
+      .front {
+        transform: translateZ(100px);
+        background-color: red;
+background-image: url('en2.jpg');
+        background-position: center;
+        background-size: cover;
+      }
+
+      .back {
+        transform: rotateY(180deg) translateZ(100px);
+        background-color: orange;
+      }
+
+      .top {
+        transform: rotateX(-90deg) translateZ(100px);
+        background-color: yellow;
+      }
+
+      .bottom {
+        transform: rotateX(90deg) translateZ(100px);
+        background-color: green;
+      }
+
+      .left {
+        transform: rotateY(-90deg) translateZ(100px);
+        background-color: blue;
+        background-image: url('en.jpg');
+        background-position: center;
+        background-size: cover;
+      }
+
+      .right {
+        transform: rotateY(90deg) translateZ(100px);
+        background-color: purple;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div class="cube">
+        <div class="face front"></div>
+        <div class="face back"></div>
+        <div class="face top"></div>
+        <div class="face bottom"></div>
+        <div class="face left"></div>
+        <div class="face right"></div>
+      </div>
+    </div>
+
+    <script>
+      const cube = document.querySelector('.cube');
+      let x = 0, y = 0;
+
+      document.addEventListener('mousemove', function(event) {
+        x = event.clientX / window.innerWidth - 0.5;
+        y = event.clientY / window.innerHeight - 0.5;
+
+        cube.style.transform = `
+          rotateX(${y * 90}deg)
+          rotateY(${x * 90}deg)
+        `;
+      });
+    </script>
+  </body>
+</html>
